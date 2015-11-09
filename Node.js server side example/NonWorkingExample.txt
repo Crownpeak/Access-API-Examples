@@ -1,0 +1,43 @@
+﻿//*************************************************************************************
+//configuration: modify config.json with the proper values
+//usage:  node syncFolder.js d:\temp\Source-Sync-Folder '/DevSite/sync-root'
+//todo: need to implment gzip support
+//todo: implement -recurse and -whatif arguments
+//*************************************************************************************
+var accessAPI = require('./accessAPIModule.js');
+
+//Process command line arguments
+var args = process.argv.slice(2);
+
+var sourceFolder = args.shift(); // local folder that you want to upload to the CMS
+var cmsFolder = args.shift(); //destination CMS path, all files and folders from the sourceFolder will be placed under this folder.
+
+console.log("Sync: " + sourceFolder + " => " + cmsFolder.green);
+
+//make call to authenticate, for this example, username and password will be looked up by the accessAPI library
+accessAPI.auth( function (data) {
+  //authenticated
+  //check if an asset exist
+  accessAPI.AssetExists(cmsFolder, function (data) 
+  {
+    if (data.exists)
+    {      
+      //auth succeeded, and destination folder exists, now start uploading files/folders
+      buildFolderList( sourceFolder, function (data)
+      {
+        //now sync, by iterating through files
+        async.eachSeries(files, fileIterator, function (err, destdir) {
+          if (err) console.log(('error: '+err).red.bold);
+          console.log('all done!');
+        });
+      });
+    }
+    else 
+    {
+      console.log(('Folder does not exist: ' + cmsFolder).red.bold)
+    }
+  });
+  }, (function (err) {
+    //something went wrong
+    console.log(err.red.bold);
+}));

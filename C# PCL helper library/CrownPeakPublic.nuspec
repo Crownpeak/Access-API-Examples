@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>CrownPeakPublic.AccessAPI-PCL</id>
+    <version>$version$</version>
+    <title>CrownPeak AccessAPI PCL</title>
+    <authors>CrownPeak</authors>
+    <owners>CrownPeak</owners>
+    <licenseUrl>https://github.com/Crownpeak/C-PCL-helper-library/blob/master/README.md</licenseUrl>
+    <projectUrl>https://github.com/Crownpeak/C-PCL-helper-library</projectUrl>
+    <iconUrl>https://avatars3.githubusercontent.com/u/9472007</iconUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <description>A public project to help users make requests to Crownpeak's Access API</description>
+    <summary>A public project to help users make requests to Crownpeak's Access API</summary>
+    <copyright>Copyright © CrownPeak 2014, 2015</copyright>
+  </metadata>
+</package>
